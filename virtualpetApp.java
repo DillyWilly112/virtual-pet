@@ -1,78 +1,99 @@
-package virtualPetGame;
-
-import java.util.Scanner; //import scanner
-
-public class virtualpetApp extends virtualPet{
-	static int random1 = 1;
-	static int random2 = 2;
-	static int random3 = 3;
-	static int random4 = 4;
-	static int random5 = 5;
-	public virtualpetApp(String user, String petType, String petName) {
+import java.util.Scanner;
+public class virtualpetApp extends virtualPet{ 
+	public virtualpetApp(String user, String petType, String petName, Object petColor) {
 		super(user, petType, petName, petColor);
 	}
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in); //scanner in.
-		System.out.println("What is your name?"); // Get user name
-   	 String user = input.nextLine();	
+ Scanner input = new Scanner(System.in); //scanner in.
+System.out.println("What is your name?"); // Get user name
+ String user = input.next();	
 System.out.println("Welcome " + user + " Do you have a dog or a cat?"); //Get pet name
-String petType = input.nextLine();
-System.out.println("Well " + user + " does your " + petType + " have a name?");
-String petName = input.nextLine();
-System.out.println("What color is your " + petType + "?");
-String petColor = input.nextLine();
-System.out.println("So what would you like to do " + "with " + petName + "?");
-System.out.println("feed enter 1"  + "," + " " + "play enter 2" + "," + " " + "bed enter 3" + "," + " " + "say hello enter 4" + "," + " " + "to quit enter 5.");
-int option = input.nextInt();
-	virtualPet newpet= new virtualPet(user, petName, petType, petColor);
-for(;;) {
-	if(random1 == option);
-	age++;
+ String petType = input.next();
+System.out.println("Well " + user + " what is your " + petType + "'s name?");
+ String petName = input.next();
+System.out.println("What color is " + petName + "?");
+ String petColor = input.next();
+ System.out.println("Okay I think i've got what I need. hold on while I create your profile...");
+ virtualPet newpet = new virtualPet(user, petName, petType, petColor);
+ System.out.println(".....");
+ System.out.println("Your profile has been created!");
+ for(;;){
+ System.out.println("What would you like to do " + "with " + petName + "?");
+ System.out.println("1. feed 4. wake up");
+ System.out.println("2. play 5. say hello");
+ System.out.println("3. bedtime 6. quit");
+ System.out.println("7. Display Stats");
+ int option = input.nextInt();
+	if(option == 1 && energy < 10) {
 	energy++;
-	tired++;
 	bored++;
-	System.out.println("you fed " + newpet + ".");
-	virtualPet.displayStats();
-    if(random2 == option);
-    age++;
-    energy--;
-    tired++;
-    bored--;
-    hunger++;
-    System.out.println("You're playing with " + newpet + ".");
-    virtualPet.displayStats();
-	if(random3 == option);
-	age++;
-	energy++;
-	tired--;
 	hunger++;
-	System.out.print("you put " + newpet + " to bed. Zzz...");
-	virtualPet.displayStats();
-    if(random4 == option);
-    age++;
+	System.out.println("you fed " + petName + ".");
+	System.out.println("energy + 1, bored - 1, hunger - 1;");
+    }
+	else if(option == 2 && energy > 2) {
+    energy--;
+    bored++;
+    hunger--;
+    System.out.println("You're playing with " + petName + ".");
+    System.out.println("energy - 1; bored - 1, hunger + 1");
+	}
+    else if(option == 3 && energy == 1) {
+	energy = energy + 2;
+	hunger = hunger - 2;
+	bored = 0;
+	System.out.print(petName + " went to bed. Zzz...");
+	System.out.println("energy + 2, hunger + 2, bored = 0");
+    }
+	else if(option == 4) {
+    System.out.println( petName + " is well rested.");
+	}
+	else if(option == 5) {
     energy++;
     bored--;
-    hunger++;
+    hunger--;
     System.out.println("You said hello to " + petName + ".");
-    virtualPet.displayStats();
-    if(random5 == option);
-    System.out.println("Goodbye " + user);
+    System.out.println("energy + 1, bored + 1, hunger +1");
+	}
+    else if(option == 6) {
+    System.out.println("Goodbye.");
+    newpet.displayStats();
     System.exit(0);
-    if(age >= tooOld);
-    System.out.println(petName + " die of old age. Gameover...");
-    System.exit(0);
-    if(energy >= sleep);
-    System.out.println(petName + " fell asleep...Zzzz...");
-    System.exit(0);
-    if(tired >= tiredDie);
+    }
+    else if(option == 7) {
+    	newpet.displayStats();
+    }
+	if(energy == 2) {
+		System.out.println("Put " + petName + " to bed !");
+	}
+	if(bored <= 2 && energy >= 1 && energy < 10) {
+		System.out.println(petName + " is bored! Play with them!");
+	}
+    if(energy <= 0) {
     System.out.println(petName + " died of Exhaustion. Gameover...");
+    newpet.displayStats();
     System.exit(0);
-    if(hunger >= hungerDie);
+    }
+    if(energy == 10) {
+		System.out.println(petName + " is full. Play with " + petName + " to famish.");
+    }
+    if(bored <= 0) {
+    	System.out.println(petName + " got too bored and ran away. Gameover... ");
+    	System.exit(0);
+    }
+    if(energy == 11) {
+    	System.out.println(petName + " has eaten too much and exploded. Gameover...");
+    	System.exit(0);
+    }
+    if(hunger == 0) {
     System.out.println(petName + " starved to death. Gameover...");
+    newpet.displayStats();
     System.exit(0);
-    if(hunger >= starving);
+    }
+    if(hunger == 2) {
     System.out.println(petName + " is hungry, feed " + petName + " before starvation. ");	
-    input.close();
-}
-	}	
+	} 
+    else;
+	}
+	}
 }//Close class
